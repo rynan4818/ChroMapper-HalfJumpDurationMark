@@ -1,8 +1,8 @@
 # ChroMapper-HalfJumpDurationMark
 
-BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapper)で、Half Jump Durationの位置に薄い壁を配置します。
+BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapper)で、Half Jump Durationの位置(ノーツがスポーンする位置)に薄い壁を配置します。
 
-In BeatSaber's mapping tool [ChroMapper](https://github.com/Caeden117/ChroMapper), place a thin wall at the Half Jump Duration location.
+In BeatSaber's [ChroMapper](https://github.com/Caeden117/ChroMapper) mapping tool, place a thin wall at the Half Jump Duration position (where the notes spawn).
 
 ![image](https://user-images.githubusercontent.com/14249877/183414388-64406875-08b0-40bf-b94b-361d0ab44628.png)
 
