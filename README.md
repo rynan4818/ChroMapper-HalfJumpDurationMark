@@ -18,6 +18,6 @@ In BeatSaber's [ChroMapper](https://github.com/Caeden117/ChroMapper) mapping too
 
 # 使用方法
 
-特に設定などはありません。
+インストールをすると適用されます。特に設定などはありません。
 
-There is no particular setting.
+It will be applied once installed. There is no particular setting.
