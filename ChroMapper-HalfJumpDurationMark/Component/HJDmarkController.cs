@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using ChroMapper_HalfJumpDurationMark.HarmonyPatches;
 
 namespace ChroMapper_HalfJumpDurationMark.Component
 {
@@ -8,15 +6,8 @@ namespace ChroMapper_HalfJumpDurationMark.Component
     {
         public float _hjd;
         public GameObject _markObject;
-        public bool _refresh = false;
-        public List<BeatmapCustomEvent> _loadedObjects = new List<BeatmapCustomEvent>();
-        private BPMChangesContainer _bpmChangeContainer;
-        private AudioTimeSyncController _atsc;
-        public float previousAtscBeat = -1;
         public void Start()
         {
-            _bpmChangeContainer = FindObjectOfType<BPMChangesContainer>();
-            _atsc = FindObjectOfType<AudioTimeSyncController>();
             var njs = BeatSaberSongContainer.Instance.DifficultyData.NoteJumpMovementSpeed;
             var offset = BeatSaberSongContainer.Instance.DifficultyData.NoteJumpStartBeatOffset;
             var bpm = BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
@@ -31,20 +22,21 @@ namespace ChroMapper_HalfJumpDurationMark.Component
             Destroy(_markObject.gameObject.GetComponent<VisualFeedback>());
             _markObject.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
             _markObject.transform.localScale = new Vector3(0.5f,1.2f,0.3f);
+            RefreshPositions();
             EditorScaleController.EditorScaleChangedEvent += EditorScaleUpdated;
-            BPMChangesContainerPatch.OnRefreshModifiedBeat += RefreshPositions;
-        }
-        public void LateUpdate()
-        {
-            if (_atsc.CurrentBeat == previousAtscBeat && !_refresh)
-                return;
-            previousAtscBeat = _atsc.CurrentBeat;
-            //_bpmChangeContainer.FindNextBpm()
+            UIMode.UIModeSwitched += ChangeUIMode;
         }
         private void OnDestroy()
         {
+            UIMode.UIModeSwitched -= ChangeUIMode;
             EditorScaleController.EditorScaleChangedEvent -= EditorScaleUpdated;
-            BPMChangesContainerPatch.OnRefreshModifiedBeat -= RefreshPositions;
+        }
+        private void ChangeUIMode(UIModeType uiMode)
+        {
+            if (uiMode == UIModeType.Normal)
+                _markObject.SetActive(true);
+            else
+                _markObject.SetActive(false);
         }
         private void EditorScaleUpdated(float obj) => RefreshPositions();
 
