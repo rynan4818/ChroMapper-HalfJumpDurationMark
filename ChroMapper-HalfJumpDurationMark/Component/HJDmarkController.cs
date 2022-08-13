@@ -17,11 +17,14 @@ namespace ChroMapper_HalfJumpDurationMark.Component
                 _hjd /= 2;
             _hjd += offset;
             if (_hjd < 0.25f) _hjd = 0.25f;
+
             var ifObject = GameObject.Find("Note Interface Scaling Offset/Interface");
+            var noteIfOffset = GameObject.Find("Note Grid/Note Interface Scaling Offset");
             _markObject = Instantiate(ifObject);
+            _markObject.transform.SetParent(noteIfOffset.transform);
             Destroy(_markObject.gameObject.GetComponent<VisualFeedback>());
-            _markObject.transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
-            _markObject.transform.localScale = new Vector3(0.5f,1.2f,0.3f);
+            _markObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+            _markObject.transform.localScale = new Vector3(1f, 1f, 0.1f);
             RefreshPositions();
             EditorScaleController.EditorScaleChangedEvent += EditorScaleUpdated;
             UIMode.UIModeSwitched += ChangeUIMode;
@@ -31,6 +34,7 @@ namespace ChroMapper_HalfJumpDurationMark.Component
             UIMode.UIModeSwitched -= ChangeUIMode;
             EditorScaleController.EditorScaleChangedEvent -= EditorScaleUpdated;
         }
+
         private void ChangeUIMode(UIModeType uiMode)
         {
             if (uiMode == UIModeType.Normal)
@@ -42,7 +46,7 @@ namespace ChroMapper_HalfJumpDurationMark.Component
 
         private void RefreshPositions()
         {
-            _markObject.transform.position = new Vector3(0, 1.5f, _hjd * EditorScaleController.EditorScale);
+            _markObject.transform.localPosition = new Vector3(0, -_hjd * EditorScaleController.EditorScale, 0.5f);
         }
     }
 }
