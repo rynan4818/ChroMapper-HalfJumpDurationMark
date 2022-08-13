@@ -4,7 +4,7 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 
 In BeatSaber's [ChroMapper](https://github.com/Caeden117/ChroMapper) mapping tool, place a thin wall at the Half Jump Duration position (where the notes spawn).
 
-![image](https://user-images.githubusercontent.com/14249877/183414388-64406875-08b0-40bf-b94b-361d0ab44628.png)
+![image](https://user-images.githubusercontent.com/14249877/184469197-987ee5d7-e05b-4b99-89da-89eb6a30157c.png)
 
 # インストール方法 (How to Install)
 
