@@ -8,15 +8,10 @@ namespace ChroMapper_HalfJumpDurationMark.Component
         public GameObject _markObject;
         public void Start()
         {
-            var njs = BeatSaberSongContainer.Instance.DifficultyData.NoteJumpMovementSpeed;
-            var offset = BeatSaberSongContainer.Instance.DifficultyData.NoteJumpStartBeatOffset;
-            var bpm = BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
-            _hjd = 4f;
-            var num = 60 / bpm;
-            while (njs * _hjd * num > 17.999f)
-                _hjd /= 2;
-            _hjd += offset;
-            if (_hjd < 0.25f) _hjd = 0.25f;
+            var songNoteJumpSpeed = BeatSaberSongContainer.Instance.MapDifficultyInfo.NoteJumpSpeed;
+            var songStartBeatOffset = BeatSaberSongContainer.Instance.MapDifficultyInfo.NoteStartBeatOffset;
+            var bpm = BeatSaberSongContainer.Instance.Info.BeatsPerMinute;
+            _hjd = SpawnParameterHelper.CalculateHalfJumpDuration(songNoteJumpSpeed, songStartBeatOffset, bpm);
 
             var ifObject = GameObject.Find("Note Interface Scaling Offset/Interface");
             var noteIfOffset = GameObject.Find("Note Grid/Note Interface Scaling Offset");
