@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using ChroMapper_HalfJumpDurationMark.Component;
+using HarmonyLib;
+using System.Reflection;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using ChroMapper_HalfJumpDurationMark.Component;
 
 namespace ChroMapper_HalfJumpDurationMark
 {
@@ -8,9 +10,13 @@ namespace ChroMapper_HalfJumpDurationMark
     public class Plugin
     {
         public static HJDmarkController hjdMarkController;
+        public static Harmony _harmony;
+        public const string HARMONY_ID = "com.github.rynan4818.ChroMapper-HalfJumpDurationMark";
         [Init]
         private void Init()
         {
+            _harmony = new Harmony(HARMONY_ID);
+            _harmony.PatchAll(Assembly.GetExecutingAssembly());
             SceneManager.sceneLoaded += SceneLoaded;
             Debug.Log("Half Jump Duration Mark Plugin has loaded!");
         }
@@ -18,6 +24,7 @@ namespace ChroMapper_HalfJumpDurationMark
         [Exit]
         private void Exit()
         {
+            _harmony.UnpatchSelf();
             Debug.Log("Half Jump Duration Mark:Application has closed!");
         }
         private void SceneLoaded(Scene arg0, LoadSceneMode arg1)

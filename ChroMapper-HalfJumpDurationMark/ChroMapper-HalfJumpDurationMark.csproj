@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component\HJDmarkController.cs" />
+    <Compile Include="HarmonyPatches\NJSEventGridContainer_UpdateDisplayHJDLinePatch.cs" />
+    <Compile Include="HarmonyPatches\NJSEventGridContainer_UpdateHJDLinePatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
